@@ -1,4 +1,4 @@
-# gamegoldnode
+# vallnet
 
 这是一个百谷王链示范项目，它通过 npm package 模式引入百谷王链核心并快速构建一个全节点应用，并提供配套命令行工具
 
@@ -9,7 +9,7 @@
 安装Node的指定版本: Nodejs@12.6.3, 安装过程中勾选'Automatically install the necessary tools'自动安装 Windows Chocolatey, python3.8.3 等辅助工具
 **注意：对14.x或更高版本的依赖库兼容性测试尚未完成，所以务请安装指定版本**
 
-安装版本管理软件: Git 2.28.0 64-bit version for Windows
+安装版本管理软件 Git 2.28.0 64-bit version for Windows
 
 2. 克隆代码库
 
@@ -55,6 +55,15 @@ vc tx.send tb1q0h3thutw4jl6hrse59493nkeg36he7dkgnt8lg 1000
 vc balance.all bookman
 ```
 @注意：系统共识设定中设定了记账奖励成熟度阀值，当前规定区块高度提升100后，先前的记账奖励才能使用
+
+## 连接远程服务器
+
+1. 确保远程主机云平台入规则开放2000-3000端口
+2. 确保远程主机防火墙关闭
+3. 使用远程指令访问
+```bash
+vc. block.tips --http-remote-host=*
+```
 
 ## 接口说明文档
 
