@@ -1,4 +1,4 @@
-# vallnet
+# gamegoldnode
 
 这是一个百谷王链示范项目，它通过 npm package 模式引入百谷王链核心并快速构建一个全节点应用，并提供配套命令行工具
 
@@ -6,24 +6,24 @@
 
 1. 部署环境
 
-安装Node的指定版本: Nodejs@12.6.3, 安装过程中勾选'Automatically install the necessary tools'自动安装 Windows Chocolatey, python3.8.3 等辅助工具
+安装Node的指定版本: Nodejs@12.20.0, 安装过程中勾选'Automatically install the necessary tools'自动安装 Windows Chocolatey, python3.9.1 等辅助工具
 **注意：对14.x或更高版本的依赖库兼容性测试尚未完成，所以务请安装指定版本**
 
-安装版本管理软件 Git 2.28.0 64-bit version for Windows
+安装Git工具: Git 2.28.0 64-bit version for Windows
 
 2. 克隆代码库
 
 在专门的项目管理文件夹根目录执行如下命令：
 
 ```bash
-git clone https://github.com/bookmansoft/vallnet
+git clone https://github.com/bookmansoft/gamegoldnode
 ```
 
 3. 配置项目
 
 ```bash
 # 进行项目目录
-cd vallnet
+cd gamegoldnode
 # 安装依赖项
 npm i
 # 将 vc 指令和行命令程序挂接
@@ -56,15 +56,43 @@ vc balance.all bookman
 ```
 @注意：系统共识设定中设定了记账奖励成熟度阀值，当前规定区块高度提升100后，先前的记账奖励才能使用
 
-## 连接远程服务器
-
-1. 确保远程主机云平台入规则开放2000-3000端口
-2. 确保远程主机防火墙关闭
-3. 使用远程指令访问
-```bash
-vc. block.tips --http-remote-host=*
-```
-
 ## 接口说明文档
 
 接口说明文档位于 ./docs
+
+## SPV钱包线上参数配置(以main网络为例)
+
+***注: innerIP 指目标服务器内网地址, outerIP 指目标服务器对外展示的虚拟地址***
+
+./.gamegold/main/gamegold.conf
+```bash
+wshost: innerIP
+```
+
+./index.js: 
+```js
+new FullNode({
+  wshost: `${innerIP}`,     //当前节点提供代理服务的守护地址
+  wsport: '2004',           //当前节点提供代理服务的守护端口
+})
+//静态网站服务的守护地址和端口
+webstatic('http', `${innerIP}`, 2009, [
+  {path: '/', dir: './www'},
+]);
+```
+
+./static/view.js: 
+```js
+new gamegold.spvnode({
+  network: 'main',                          //网络类型
+  seeds:
+  [
+    `${outerIP}:2000`,                      //透过代理服务器实际连接的远程服务器的地址
+  ],
+  'http-remote-host': `${outerIP}`,         //提供开放式RPC调用接口的远程服务器的地址
+  proxy: `${outerIP}`,                      //代理服务器地址
+  wsport: '2004',                           //代理服务器端口
+  genesisParams: {"mainAddresses":"..."},   //必须和创世参数保持一致
+})
+```
+

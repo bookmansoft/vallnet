@@ -61,8 +61,22 @@ typings/
 .next
 
 .gamegold/testnet/
+.gamegold/n0/*.ldb
+.gamegold/n1/*.ldb
+.gamegold/n2/*.ldb
+.gamegold/n3/*.ldb
+.gamegold/n0/*.json
+.gamegold/n1/*.json
+.gamegold/n2/*.json
+.gamegold/n3/*.json
 .gamegold/main/
 .gamegold/htlc/
 *.encrypt
+main*.keystore
 backup.txt
 package-lock.json
+.gamegold/client*/
+docs/vallnet.md
+.gamegold/main_backup/
+.gamegold/clone/
+main-genesis.params

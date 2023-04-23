@@ -31,8 +31,10 @@
           "program": "${workspaceFolder}/index.js",
           "outputCapture": "std",
           "args": [                
-            //"--prefix=./.gamegold/testnet2",
-            //"--port-offset=50",
+            "--bip150=false",
+            "--bip151=false",
+            "--password=bookmansoft",
+            //"--nodes=127.0.0.1:2110",
             "--debug",
             "--genesis",
             "--network=testnet"
@@ -43,6 +45,25 @@
           ]
       },
       {
+        "type": "node",
+        "request": "launch",
+        "name": "MASTER",
+        "program": "${workspaceFolder}/index.js",
+        "outputCapture": "std",
+        "args": [                
+          "--bip150=false",
+          "--bip151=false",
+          //"--nodes=127.0.0.1:2010",
+          "--workers=false",
+          "--genesis",
+          "--network=main"
+        ],
+        "skipFiles": [
+          "${workspaceFolder}/node_modules/**/*.js",
+          "<node_internals>/**/*.js"
+        ]
+    },
+    {
           "type": "node",
           "request": "launch",
           "name": "CLI Test",
