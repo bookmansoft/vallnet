@@ -66,6 +66,7 @@ describe('链间互操作（同构）', () => {
   });
 
   before(async ()=>{
+    await remoteA.wait(1000);
     //启动一个进程，运行一条独立链
     net_main = exec(`node index.js --genesis --mining=false --network=main --log-file=true --workers=true --workers-timeout=60000 --coin-cache=100000`, function(err, stdout, stderr) {
       if(err) {
@@ -76,7 +77,6 @@ describe('链间互操作（同构）', () => {
     await remoteA.wait(6000);
 
     //连接A链节点1，执行检测工作，确保A链拥有一定成熟度
-    await remoteA.execute('miner.setsync.admin', [true]);
     let ret = await remoteA.execute('block.tips', []);
     if(ret.result[0].height < 120) {
       for(let i = 0; i < 120 - ret.result[0].height; i++) {
@@ -86,7 +86,6 @@ describe('链间互操作（同构）', () => {
     }
 
     //连接B链节点1，执行检测工作，确保B链拥有一定成熟度
-    await remoteB.execute('miner.setsync.admin', [true]);
     ret = await remoteB.execute('block.tips', []);
     if(ret.result[0].height < 120) {
       for(let i = 0; i < 120 - ret.result[0].height; i++) {
@@ -304,7 +303,7 @@ describe('链间互操作（同构）', () => {
    it('查询跨链交易', async () => {
       //连接B链节点1，下达关闭服务器指令
       let ret = await remoteB.execute('sys.stop.admin', []);
-      await remoteA.wait(2000);
+      await remoteA.wait(3000);
         
       //连接A链节点1，查询并打印跨链合约信息
       ret = await remoteA.execute('htlc.query', []);

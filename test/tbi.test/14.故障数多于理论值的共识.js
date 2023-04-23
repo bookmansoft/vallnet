@@ -45,6 +45,7 @@ let env = {
 
 describe('故障数多于理论值的共识', () => {
     before(async ()=> {
+        await remote.wait(1000);
         //通过SDK连接3号节点，生成演示用地址
         let ret = await remote.execute('address.create', []);
         let address = ret.result.address;

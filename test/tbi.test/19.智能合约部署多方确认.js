@@ -41,8 +41,8 @@ let env = {
 
 describe('智能合约部署多方确认', () => {
     before(async () => {
+        await remote.wait(1000);
         //连接节点2，设置长连模式，并订阅指定消息 'sc/publish'
-        await remote.execute('miner.setsync.admin', [true]);
         let ret = await remote.execute('block.tips', []);
         if(ret[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret[0].height]);

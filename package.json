@@ -11,10 +11,10 @@
     "wallet": "node wallet.js --genesis --network=testnet --workers=true --http-remote-port=2102",
     "cli-testnet": "node bin/cli --port=2102",
     "cli": "node bin/cli --port=2002",
-    "n0": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2104 --prefix=~/.gamegold/n0 --bip151=true --bip150=true",
-    "n1": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2114 --prefix=~/.gamegold/n1 --bip151=true --bip150=true --port-offset=10 --nodes=127.0.0.1:2100 --password=bookmansoft --keystore=testnet-mchain-1.keystore",
-    "n2": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2124 --prefix=~/.gamegold/n2 --bip151=true --bip150=true --port-offset=20 --nodes=127.0.0.1:2100 --password=bookmansoft --keystore=testnet-mchain-2.keystore",
-    "n3": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2134 --prefix=~/.gamegold/n3 --bip151=true --bip150=true --port-offset=30 --nodes=127.0.0.1:2100 --password=bookmansoft --keystore=testnet-mchain-3.keystore"
+    "n0": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2104 --prefix=~/.gamegold/n0 --bip151=true --bip150=true --nodes=127.0.0.1:2110,127.0.0.1:2120,127.0.0.1:2130",
+    "n1": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2114 --prefix=~/.gamegold/n1 --bip151=true --bip150=true --nodes=127.0.0.1:2100,127.0.0.1:2120,127.0.0.1:2130 --port-offset=10 --password=bookmansoft --keystore=testnet-mchain-1.keystore",
+    "n2": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2124 --prefix=~/.gamegold/n2 --bip151=true --bip150=true --nodes=127.0.0.1:2100,127.0.0.1:2110,127.0.0.1:2130 --port-offset=20 --password=bookmansoft --keystore=testnet-mchain-2.keystore",
+    "n3": "node index.js --genesis --network=testnet --mining=false --workers=true --log-file=true --wshost=127.0.0.1 --wsport=2134 --prefix=~/.gamegold/n3 --bip151=true --bip150=true --nodes=127.0.0.1:2100,127.0.0.1:2110,127.0.0.1:2120 --port-offset=30 --password=bookmansoft --keystore=testnet-mchain-3.keystore"
   },
   "bin": {
     "gg": "./bin/cli-testnet",

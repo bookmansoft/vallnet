@@ -32,6 +32,15 @@ let env = {};
 //#endregion
 
 describe('事件机制', () => {
+    before(async () => {
+        await remoteA.wait(500);
+        let ret = await remoteA.execute('block.tips', []);
+        if(ret.result[0].height < 120) {
+            await remoteA.execute('miner.generate.admin', [120 - ret.result[0].height]);
+        }
+        await remoteA.wait(500);
+    });
+
     after(()=>{
         remoteA.close();
     });

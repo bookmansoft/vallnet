@@ -32,7 +32,7 @@ let env = {
 
 describe('长时间运行稳定性测试', () => {
     before(async () => {
-        await remote.execute('miner.setsync.admin', [true]);
+        await remote.wait(1000);
         let ret = await remote.execute('block.tips', []);
         if(ret[0].height < 100) {
             await remote.execute('miner.generate.admin', [100 - ret[0].height]);

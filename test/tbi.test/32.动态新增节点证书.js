@@ -42,7 +42,7 @@ let env = {
 
 describe('动态新增节点证书', () => {
     before(async () => {
-        await remote.execute('miner.setsync.admin', [true]);
+        await remote.wait(500);
         let ret = await remote.execute('block.tips', []);
         if(ret[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret[0].height]);

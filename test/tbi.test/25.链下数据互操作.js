@@ -33,7 +33,7 @@ const remoteA = connector({
 
 describe('链下数据互操作', () => {
     before(async () => {
-        await remoteA.execute('miner.setsync.admin', [true]);
+        await remoteA.wait(500);
         let ret = await remoteA.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remoteA.execute('miner.generate.admin', [120 - ret.result[0].height]);

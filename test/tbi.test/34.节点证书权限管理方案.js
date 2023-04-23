@@ -39,9 +39,9 @@ let env = {account: uuid(),};
 
 describe('节点证书权限管理方案', () => {
     before(async () => {
+        await remote.wait(500);
         await remote.execute('sys.devmode', [false]);
 
-        await remote.execute('miner.setsync.admin', [true]);
         let ret = await remote.execute('block.tips', []);
         if(ret[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret[0].height]);

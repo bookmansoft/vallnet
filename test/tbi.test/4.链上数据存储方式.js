@@ -43,8 +43,8 @@ describe('链上数据存储方式', function() {
     });
 
     before(async () => {
+        await remote.wait(1000);
         //通过SDK，采用WS协议连接节点1，监听事件、设置事件处理句柄，并发起指令准备演示账户数据
-        await remote.execute('miner.setsync.admin', [true]);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 100) {
             await remote.execute('miner.generate.admin', [100 - ret.result[0].height]);

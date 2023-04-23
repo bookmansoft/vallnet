@@ -40,8 +40,8 @@ let env = {
 
 describe('交易处理流程', () => {
     before(async () => {
+        await remote.wait(1000);
         //通过SDK，以WS协议连接节点1，订阅指定消息
-        await remote.execute('miner.setsync.admin', [true]);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret.result[0].height]);

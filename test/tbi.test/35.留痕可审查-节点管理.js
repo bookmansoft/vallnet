@@ -41,9 +41,9 @@ let env = {
 
 describe('留痕可审查', () => {
     before(async () => {
+        await remote.wait(500);
         await remote.execute('sys.devmode', [false]);
 
-        await remote.execute('miner.setsync.admin', [true]);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret.result[0].height]);

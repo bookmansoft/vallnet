@@ -48,6 +48,7 @@ let env = {
 
 describe('账户权限体系', () => {
     before(async () => {
+        await remote.wait(500);
         await remote.execute('sys.devmode', [false]);
     });
     after(async ()=>{

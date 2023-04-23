@@ -45,7 +45,7 @@ let env = {
 
 describe('删除节点的稳定性', () => {
     before(async () => {
-        await remote.execute('miner.setsync.admin', [true]);
+        await remote.wait(1000);
         let ret = await remote.execute('block.tips', []);
         if(ret[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret[0].height]);

@@ -37,7 +37,7 @@ let env = {
 
 describe('SDK支持方案', () => {
     before(async () => {
-        await remote.execute('miner.setsync.admin', [true]);
+        await remote.wait(500);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret.result[0].height]);

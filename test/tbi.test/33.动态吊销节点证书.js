@@ -46,8 +46,8 @@ let env = {
 
 describe('动态吊销节点证书', () => {
     before(async () => {
+        await remote.wait(500);
         //提前配置好节点1和节点2，都拥有合法证书，运行节点1和节点2
-        await remote.execute('miner.setsync.admin', [true]);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret.result[0].height]);
@@ -56,6 +56,8 @@ describe('动态吊销节点证书', () => {
         await remote.execute('sys.alliance.create', ['bookmansoft', notes[1].id, notes[1].alliance, `${notes[1].inner}:${notes[1].tcp}`]);
         await remote.wait(3000);
 
+        await remote.execute('miner.generate.admin', [1]);
+        await remote.execute('miner.generate.admin', [1]);
         await remote.execute('sys.alliance.refresh', [500000000]);
         await remote.execute('miner.generate.admin', [1]);
         await remote.wait(2000);

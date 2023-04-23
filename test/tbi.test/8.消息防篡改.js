@@ -40,7 +40,7 @@ let env = {
 
 describe('消息防篡改', () => {
     before(async () => {
-        await remote.execute('miner.setsync.admin', [true]);
+        await remote.wait(1000);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret.result[0].height]);

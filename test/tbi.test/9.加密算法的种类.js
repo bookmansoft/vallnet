@@ -38,18 +38,18 @@ const utils = remote.gamegold.utils;
 
 //#region 申明环境变量
 let env = {
-    alice: {name: `Alice-${uuid()}`,},
+    alice: {name: uuid()},
 };
 //#endregion
 
 describe('加密算法的种类', () => {
     before(async () => {
-        await remote.execute('miner.setsync.admin', [true]);
+        await remote.wait(3000);
         let ret = await remote.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remote.execute('miner.generate.admin', [120 - ret.result[0].height]);
         }
-        await remote.wait(500);
+        await remote.wait(1000);
     });
 
     it('调用SHA256求哈希, 散列值长度规定为32字节', async () => {

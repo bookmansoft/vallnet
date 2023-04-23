@@ -86,6 +86,7 @@ let env = {};
 
 describe('区块结构', () => {
     before(async () => {
+        await remoteA.wait(1000);
         //通过SDK，以WS协议连接节点1，订阅指定消息
         remoteA.setmode(remoteA.CommMode.ws, async () => {});
         remoteA.watch(async msg => {

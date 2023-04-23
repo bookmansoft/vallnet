@@ -57,6 +57,7 @@ describe('通信机制', () => {
     });
 
     it('A节点采用TCP协议和B节点相互连接', async () => {
+        await remoteA.wait(1000);
         //通过SDK连接节点1，查询并打印网络拓扑
         let ret = await remoteA.execute('sys.peerinfo', [true]);
         assert(!ret.error);

@@ -52,27 +52,27 @@ const remoteD = connector({
 
 describe('组网方式', () => {
     before(async () => {
-        await remoteA.execute('miner.setsync.admin', [true]);
+        await remoteA.wait(1000);
         let ret = await remoteA.execute('block.tips', []);
         if(ret.result[0].height < 120) {
             await remoteA.execute('miner.generate.admin', [120 - ret.result[0].height]);
         }
 
-        // //通过SDK连接节点1，为各节点创建证书，设定拓扑方式，手工拷贝生成的证书至节点主目录
-        // await remoteA.execute('sys.alliance.create', ['bookmansoft', notes[1].id, notes[1].alliance, `${notes[1].inner}:${notes[1].tcp}`]);
-        // await remoteA.wait(3000);
-        // await remoteA.execute('sys.alliance.create', ['bookmansoft', notes[2].id, notes[2].alliance, `${notes[2].inner}:${notes[2].tcp}`]);
-        // await remoteA.wait(3000);
-        // await remoteA.execute('sys.alliance.create', ['bookmansoft', notes[3].id, notes[3].alliance, `${notes[3].inner}:${notes[3].tcp}`]);
-        // await remoteA.wait(3000);
+        //通过SDK连接节点1，为各节点创建证书，设定拓扑方式，手工拷贝生成的证书至节点主目录
+        await remoteA.execute('sys.alliance.create', ['bookmansoft', notes[1].id, notes[1].alliance, `${notes[1].inner}:${notes[1].tcp}`]);
+        await remoteA.wait(3000);
+        await remoteA.execute('sys.alliance.create', ['bookmansoft', notes[2].id, notes[2].alliance, `${notes[2].inner}:${notes[2].tcp}`]);
+        await remoteA.wait(3000);
+        await remoteA.execute('sys.alliance.create', ['bookmansoft', notes[3].id, notes[3].alliance, `${notes[3].inner}:${notes[3].tcp}`]);
+        await remoteA.wait(3000);
 
-        // //通过SDK连接节点1，为各节点补充燃料值，同时刷新网络拓扑
-        // await remoteA.execute('sys.alliance.refresh', [500000000]);
-        // await remoteA.wait(2000);
+        //通过SDK连接节点1，为各节点补充燃料值，同时刷新网络拓扑
+        await remoteA.execute('sys.alliance.refresh', [500000000]);
+        await remoteA.wait(2000);
 
-        // //通过SDK连接节点1，发起共识流程，使得上述交易生效
-        // await remoteA.execute('miner.generate.admin', [1]);
-        // await remoteA.wait(1000);
+        //通过SDK连接节点1，发起共识流程，使得上述交易生效
+        await remoteA.execute('miner.generate.admin', [1]);
+        await remoteA.wait(1000);
     });
 
     it(`连接节点${notes[0].name}, 查询并获取该节点当前网络拓扑信息`, async () => {
