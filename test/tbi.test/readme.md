@@ -6,7 +6,12 @@
 
 1. 登录IP白名单允许的公网服务器
 
-2. 为此服务器部署 mocha@5.2.0 vscode nodejs@14.16.0 git 等工具
+2. 为此服务器全局部署如下必要工具
+```bash
+mocha@5.2.0 
+nodejs@14.16.0
+git
+```
 
 3. 为此服务器部署项目
 ```
@@ -16,6 +21,7 @@ git clone https://github.com/bookmansoft/vallnet
 4. 同时打开五个控制台窗口:
 - 1号窗口, 运行1号节点
     cd vallnet
+    npm i
     npm run n0
 - 2号窗口, 运行2号节点并自动组网
     cd vallnet
