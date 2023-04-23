@@ -71,6 +71,9 @@ describe('转账情况下的双花攻击防范', () => {
     it('再次花费指定UTXO，向B节点提交一笔转账交易：失败', async () => {
         //通过SDK连接至节点1，花费同一笔UTXO，生成一笔转账交易数据，暂不发送
         let ret = await remote.execute('address.create', []);
+        if(ret.error) {
+            console.log(ret.error);
+        }
         assert(!ret.error);
         env.address = ret.result.address;
         console.log(`将向地址${env.address}发起转账操作`);
@@ -79,10 +82,14 @@ describe('转账情况下的双花攻击防范', () => {
             in:[{hash: env.utxo.txid, index: env.utxo.vout}]},  
             [{address: env.address, value: 100000}]
         ]);
+        if(ret.error) {
+            console.log(ret.error);
+        }
         assert(!ret.error);
         env.tx = ret.result;
 
         await remote.wait(6000); //由于节点间交易数据同步需要一定时间，此处稍微停顿下
+        await remote.wait(1000); //由于节点间交易数据同步需要一定时间，此处稍微停顿下
         await remote.wait(1000); //由于节点间交易数据同步需要一定时间，此处稍微停顿下
 
         //通过SDK切换连接到节点2，重放这笔交易数据
